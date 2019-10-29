@@ -71,3 +71,128 @@ function of (...values) {
     })
 }
 ```
+
+### Imports
+```js
+import { Observable, Subscription, of, from, fromEvent, forkJoin } from 'rxjs';
+import { switchMap, catchError, map  } from 'rxjs/operators';
+```
+
+### Observable **from** a Promise
+
+```js
+function test(i) {
+    return new Promise((resolve, reject) => {
+        if (i < 0) reject('negative');
+        else resolve('zero or positive');
+    });
+}
+
+const myObserver = {
+    next: msg => console.log(`message: ${msg}`),
+}
+
+from(test(1)).subscribe(myObserver); // prints "zero or positive"
+```
+
+### An observable that emits several values
+```js
+const myObs = of (1, 'a', () => 42)
+myObs.subscribe(x => console.log(x)) // prints "1" "a" "f()"
+```
+
+### Catching errors
+```js
+const myObs = new Observable(observer => observer.error('AN ERROR')) // An observer that throws an error
+myObs
+    .pipe(catchError(e => {
+        console.error(e);
+        return of('Error was successfully caught');
+    }))
+    .subscribe(x => console.log(x)) // prints "AN ERROR" "Error was successfully caught"
+```
+
+### Apply projection with each value from source (`map`)
+```js
+// Here it is the Observable that manages what happens on 'next()', not the Subscription anymore
+const myObservable: Observable < any > = of (1, 2, 3)
+    .pipe(map(x => console.log(x)));
+
+const mySubscription: Subscription = myObservable.subscribe(); // prints "1" "2" "3"
+```
+
+### From events
+#### Some events
+```js
+@ViewChild('hello', {static: false})
+hello: ElementRef;
+
+ngAfterViewInit() {
+        fromEvent(this.hello.nativeElement, 'click')
+            .subscribe(_ => console.warn('clicked'));
+
+        fromEvent(this.hello.nativeElement, 'contextmenu')
+            .subscribe(_ => console.warn('contextmenu'));
+
+        fromEvent(this.hello.nativeElement, 'copy')
+            .subscribe(_ => console.warn('copy'));
+
+        fromEvent(this.hello.nativeElement, 'dblclick')
+            .subscribe(_ => console.warn('dblclick'));
+```
+
+#### Calculate the time spent in a div
+```js
+@ViewChild('hello', {static: false})
+hello: ElementRef;
+
+ngAfterViewInit() {
+    const mouseEnter = fromEvent(this.hello.nativeElement, 'mouseenter')
+        .pipe(map(_ => {
+            const d = new Date();
+            console.log(`Enter: ${d.toLocaleTimeString()}`);
+            return d;
+        }))
+
+    const mouseLeave = (dateMouseEnter) => fromEvent(this.hello.nativeElement, 'mouseleave')
+        .pipe(map(_ => {
+            const d = new Date();
+            console.log(`Leave: ${d.toLocaleTimeString()}`);
+            return d - dateMouseEnter;
+        }))
+
+    mouseEnter
+        .pipe(switchMap(dateMouseEnter => mouseLeave(dateMouseEnter)))
+        .subscribe(ml => console.log(ml + ' [ms]'));
+}
+```
+#### Another way to do it with `zip()`
+```js
+const mouseEnter = fromEvent(this.hello.nativeElement, 'mouseenter')
+    .pipe(map(_ => Date.now()))
+
+const mouseLeave = fromEvent(this.hello.nativeElement, 'mouseleave')
+    .pipe(map(_ => Date.now()))
+
+zip(
+    mouseEnter,
+    mouseLeave
+).subscribe(times => {
+    const [time0, time1] = times;
+    console.log(time1 - time0)
+})
+```
+
+### Waiting for several Observables simultaneously, emits when last value is received
+```js
+const obs1 = of (1).pipe(delay(3000))
+const obs2 = of (2).pipe(delay(1000))
+
+forkJoin(
+    obs1,
+    obs2
+).subscribe(results => {
+    const [res1, res2] = results;
+    console.log(res1 + res2); // print "3" after s seconds
+})
+```
