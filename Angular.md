@@ -1,6 +1,9 @@
 # Angular
 
+Angular is a single page application web framework
+
 ## Observables
+Observables look like Promises, except that they can be "triggered" several times. Think about one Promise in which we could call the `resolve()` method several times.
 
 ### Promises vs Observables
 
