@@ -1,5 +1,7 @@
 # Electron
 
+Electron allows to create desktop apps with web technologies
+
 ## Getting started
 
 Put this `main.js` file on the root folder of your app:
