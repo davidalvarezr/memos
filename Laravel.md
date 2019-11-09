@@ -25,6 +25,6 @@ Route::get('/{n}', function ($n) {
 ### Allow certain character in the route (regex)
 ```php
 Route::get('{n}', function ($n) { return 'I am the page n° ' . $n . '!'; })
-    ->where('n', '^[^0][0-9]+');
+    ->where('n', '[1-9][0-9]*');
 ```
 Will match any `n` which is a number not beginning by a `0`.
