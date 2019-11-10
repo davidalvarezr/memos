@@ -28,3 +28,24 @@ Route::get('{n}', function ($n) { return 'I am the page n° ' . $n . '!'; })
     ->where('n', '[1-9][0-9]*');
 ```
 Will match any `n` which is a number not beginning by a `0`.
+
+### Redirection and route naming
+The two codes below show two ways of redirecting `/redirection` to `/`.
+
+Basic redirection
+```php
+Route::get('/', function () { return view('welcome'); });
+
+Route::get('redirection', function() {
+    return redirect('/');
+});
+```
+Redirection using route name
+```php
+// name `/` as `home`
+Route::get('/', ['as' => 'home', function () { return view('welcome'); }]);
+
+Route::get('redirection', function() {
+    return redirect()->route('home');
+});
+```
