@@ -70,3 +70,38 @@ In the view:
 // article.blade.php (blade syntax {{}})
 <p>It is the article n° {{ $numero }}</p>
 ```
+
+### Templates
+With tmeplates, code one template view, then fill it with other views thanks to `@extends` keyword:
+
+The template
+```blade
+<!-- generic.blade.php -->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>@yield('title')</title>
+</head>
+<body>
+@yield('content')
+</body>
+</html>
+```
+The view extending the template
+```blade
+<!-- article.blade.php -->
+
+@extends('generic')  <!--Use the template `generic.blade.php`-->
+
+<!--In `generic.blade.php`, replace @yield('title') by Articles-->
+@section('title')
+    Articles
+@endsection
+
+<!--In `generic.blade.php`, replace @yield('content') by <p>It is the article n° {{ $numero }}</p>-->
+@section('content')
+    <p>It is the article n° {{ $numero }}</p>
+@endsection
+```
