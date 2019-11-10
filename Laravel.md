@@ -105,3 +105,33 @@ The view extending the template
     <p>It is the article n° {{ $numero }}</p>
 @endsection
 ```
+
+## Controllers
+
+### Create a controller
+```
+php artisan make:controller WelcomeController
+```
+
+### Call a method controller from a route
+```php
+Route::get('/', 'WelcomeController@index');
+```
+`WelcomeController` is the class name of the controller. `index` is the public method that is called in the controller.
+
+### ... same with a named route
+```php
+Route::get('/', ['uses' => 'WelcomeController@index', 'as' => 'home']);
+```
+
+### Give route param to controller
+(Nothing to do)
+```php
+// web.php
+Route::get('article/{n}', 'ArticleController@show')->where('n', '[0-9]+');
+
+// ArticleController.php (inside the class)
+public function show($n) {
+    return view('article')->with('numero', $n);
+}
+```
