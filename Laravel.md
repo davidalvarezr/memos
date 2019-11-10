@@ -49,3 +49,24 @@ Route::get('redirection', function() {
     return redirect()->route('home');
 });
 ```
+
+### Use a php variable inside a view
+Inside the code of a route:
+```php
+return view('article')->with('numero', $n);
+// which is the same that
+return view('article')->withNumero($n);
+// which is the same that
+return view('article', ['numero' => $n]);       // Useful when there are several variables
+```
+`$numero` variable will then be available inside the view `article.php` or `article.blade.php`.
+
+In the view:
+```php
+// article.php
+<p>It is the article n° <?php echo $numero ?></p>
+```
+```php
+// article.blade.php (blade syntax {{}})
+<p>It is the article n° {{ $numero }}</p>
+```
