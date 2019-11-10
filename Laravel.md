@@ -22,6 +22,8 @@ Laravel is a PHP framework
 ## Docs
 - [How to setup Vagrant with Laravel Homestead Tutorial](https://www.youtube.com/watch?v=rs2Hzx4qBm8)
 - [Découvrez le framework PHP Laravel](https://openclassrooms.com/fr/courses/3613341-decouvrez-le-framework-php-laravel/3616434-installation-et-organisation) (french)
+- [Laravel and Angular together](https://www.youtube.com/watch?v=97BggEw0dJI)
+- [Laravel - Stateless HTTP Basic Authentication](https://laravel.com/docs/5.7/authentication#stateless-http-basic-authentication) (useful for API)
 
 ## Routes
 Routes are in folder `app/routes/web.php`
@@ -152,4 +154,44 @@ Route::get('article/{n}', 'ArticleController@show')->where('n', '[0-9]+');
 public function show($n) {
     return view('article')->with('numero', $n);
 }
+```
+
+## Forms
+Blade allows to create form easily
+```blade
+resources/views/info-form.blade.php
+
+@extends('templates.form')      {{--Extends template `form.blade.php` in `templates/`--}}
+
+@section('form')
+
+    {!! Form::open(['url' => 'users']) !!}              {{--Go to this url when sent--}}
+        {!! Form::label('name', 'Put your name: ') !!}  {{--label--}}
+        {!! Form::text('name') !!}                      {{--text area--}}
+        {!! Form::submit('Send !') !!}                  {{--submit button--}}
+    {!! Form::close() !!}
+
+@endsection
+```
+This will send the form to the url `/users` (**POST** by default)
+
+## Requests
+This code show to handle the previous form when it is sent
+```php
+// routes/web.php
+
+Route::get('users', 'InfoController@getForm');         // Send the form to the user
+Route::post('users', 'InfoController@sendFilledForm'); // Handle post with filled form
+
+
+// app/Http/Controllers/InfoController.php (inside the class)
+
+public function getForm() {
+    return view('info-form');
+}
+
+public function sendFilledForm(Request $request) {
+    return 'The name is ' . $request->name;
+}
+
 ```
