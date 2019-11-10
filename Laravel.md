@@ -1,6 +1,24 @@
 # Laravel
 Laravel is a PHP framework
 
+## Table of contents
+- [Laravel](#laravel)
+  * [Docs](#docs)
+  * [Routes](#routes)
+    + [Returning an HTML page](#returning-an-html-page)
+    + [Get a parameter from a route](#get-a-parameter-from-a-route)
+    + [Allow certain character in the route (regex)](#allow-certain-character-in-the-route-regex)
+    + [Redirection and route naming](#redirection-and-route-naming)
+    + [Use a php variable inside a view](#use-a-php-variable-inside-a-view)
+    + [Templates](#templates)
+  * [Controllers](#controllers)
+    + [Create a controller](#create-a-controller)
+    + [Call a method controller from a route](#call-a-method-controller-from-a-route)
+    + [... same with a named route](#-same-with-a-named-route)
+    + [Give route param to controller](#give-route-param-to-controller)
+
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+
 ## Docs
 - [How to setup Vagrant with Laravel Homestead Tutorial](https://www.youtube.com/watch?v=rs2Hzx4qBm8)
 - [Découvrez le framework PHP Laravel](https://openclassrooms.com/fr/courses/3613341-decouvrez-le-framework-php-laravel/3616434-installation-et-organisation) (french)
