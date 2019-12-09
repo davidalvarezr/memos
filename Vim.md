@@ -2,7 +2,7 @@
 
 ## Motions
 
-Motions is an event that moves the cursor to a different position. Motions can be preceded by a number `n`, which will repest the motion `n` times.
+Motions is an event that moves the cursor to a different position. Motions can be preceded by a number `n`, which will repeat the motion `n` times.
 
 ### Basic motions
 
@@ -45,13 +45,17 @@ Motions is an event that moves the cursor to a different position. Motions can b
 
 **Find characters**
 
-`t<char>:`: move forward un**t**il <char>
+`t<char>`: move forward un**t**il <char>
 
 `T<char>`: move backward un**t**il <char>
 
 `f<char>`: move forward on <char>
 
 `F<char>`: move backward on <char>
+
+`;`: repeat last move of this list forward
+
+`,`: repeat last move of this list backward
 
 ### Vertical motions
 
@@ -78,3 +82,15 @@ Motions is an event that moves the cursor to a different position. Motions can b
 `{`: move to previous empty line
 
 `}`: move to next empty line
+
+**Searching**
+
+`/<text><Enter>`: move the cursor on the first occurence of <text> after the cursor
+
+`n`: go to the next occurence of <text>
+
+`N`: go to previius occurence of <text>
+
+`*`: go to next occurence of the word which is under the cursor
+
+`#`: go to previous occurence of the word which is under the cursor
