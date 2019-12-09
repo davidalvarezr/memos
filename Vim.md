@@ -106,7 +106,9 @@ Motions is an event that moves the cursor to a different position. Motions can b
 ### Screen motions
 
 `zt`: move the screen so that cursor is at the **t**op of the screen
+
 `zz`: move the screen so that cursor is at the middle of the screen
+
 `zb`: move the screen so that cursor is at the **b**ottom of the screen
 
 ## Actions
@@ -134,7 +136,7 @@ Registers are places in which you can store characters, see `:reg`.
 
 `D`: delete until the end of the line
 
-`y<motion>`: yank until the end of the (copy)
+`y<motion>`: yank (copy)
 
 `yy`: yank (copy) whole line
 
