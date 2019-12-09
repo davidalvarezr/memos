@@ -29,6 +29,14 @@ Motions is an event that moves the cursor to a different position. Motions can b
 
 `g_`: move at the last non blank character of the line
 
+`I`: move at the beginning of line and set INSERT MODE
+
+`A`: move at the end of the line and set INSERT MODE
+
+`o`: insert a new line under the cursor, move to it and set INSERT MODE
+
+`O`: insert a new line above the cursor, move to it and set INSERT MODE
+
 **Words**
 
 `w`: move to next word
@@ -94,3 +102,72 @@ Motions is an event that moves the cursor to a different position. Motions can b
 `*`: go to next occurence of the word which is under the cursor
 
 `#`: go to previous occurence of the word which is under the cursor
+
+### Screen motions
+
+`zt`: move the screen so that cursor is at the **t**op of the screen
+`zz`: move the screen so that cursor is at the middle of the screen
+`zb`: move the screen so that cursor is at the **b**ottom of the screen
+
+## Actions
+
+Actions modify the text in a certain way, they are followed by a motion. A capital letter action offen acts on the whole line. The deleted or yanked characters are stored in the registers. Type `:reg` to see the content of all the registers.
+
+- `line`: the line
+- `whole line`: the line including the `<CR>` character at the end
+
+### Registers
+
+Registers are places in which you can store characters, see `:reg`.
+
+`"<lowercase_letter>`: set in register `<lowercase_letter>`
+
+`"<uppercase_letter>`: append in register `<lowercase_letter>`
+
+`"<register>p`: paste from register
+
+### Basic actions
+
+`d<motion>`: delete
+
+`dd`: delete whole line
+
+`D`: delete until the end of the line
+
+`y<motion>`: yank until the end of the (copy)
+
+`yy`: yank (copy) whole line
+
+`Y`: yank (copy) line
+
+`c<motion>`: change (delete and set INSERT MODE)
+
+`cc`: change whole line
+
+`C`: change until end of line
+
+`p`: paste after cursor. If the content is a `whole line`, paste at the next line
+
+`P`: paste before cursor. If the content is a `whole line`, paste at the previous line
+
+### Character/line actions
+
+r<char> replace character under cursor by `<char>`
+
+`R`: set REPLACE MODE
+
+`x`: delete current char
+
+`X`: delete char before cursor
+
+`s`: delete current char and set INSERT MODE
+
+`S`: delete current line and set INSERT MODE
+
+### inside/around
+
+A text object can be a word or a WORD, for example. This is useful when you are in the middle of a text object and you want to act on the whole text object.
+
+`<action>i<text_object>`: action **i**nside text object. For example `ci'` on a text which is between `''` will change everything **I**NSIDE `''`. `ciw` will change the word
+
+`<action>a<text_object>`: action **a**round text object. For example `ca(` on a text which is between parenthesis will change the word and the parenthesis. `caw` will also change the word
