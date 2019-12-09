@@ -45,13 +45,13 @@ Motions is an event that moves the cursor to a different position. Motions can b
 
 **Find characters**
 
-`t<char>`: move forward un**t**il <char>
+`t<char>`: move forward un**t**il `<char>`
 
-`T<char>`: move backward un**t**il <char>
+`T<char>`: move backward un**t**il `<char>`
 
-`f<char>`: move forward on <char>
+`f<char>`: move forward on `<char>`
 
-`F<char>`: move backward on <char>
+`F<char>`: move backward on `<char>`
 
 `;`: repeat last move of this list forward
 
@@ -69,7 +69,7 @@ Motions is an event that moves the cursor to a different position. Motions can b
 
 **Specific line**
 
-`:<n><Enter>`: move at line number <n>
+`:<n><Enter>`: move at line number `<n>`
 
 `<n>%`: move at the percentage of the file (50% on 10 lines will move to the 5th line)
 
@@ -85,11 +85,11 @@ Motions is an event that moves the cursor to a different position. Motions can b
 
 **Searching**
 
-`/<text><Enter>`: move the cursor on the first occurence of <text> after the cursor
+`/<text><Enter>`: move the cursor on the first occurence of `<text>` after the cursor
 
-`n`: go to the next occurence of <text>
+`n`: go to the next occurence of `<text>`
 
-`N`: go to previius occurence of <text>
+`N`: go to previius occurence of `<text>`
 
 `*`: go to next occurence of the word which is under the cursor
 
